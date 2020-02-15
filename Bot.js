@@ -4,7 +4,7 @@ const client = new Discord.Client();
 
 //league kayn api stuff
 const { Kayn, REGIONS } = require('kayn');
-const kayn = Kayn('')({
+const kayn = Kayn('RGAPI-e8d5db05-b6e6-4577-a0f1-26b44667fa1a')({
     region: REGIONS.NORTH_AMERICA,
     apiURLPrefix: 'https://%s.api.riotgames.com',
     locale: 'en_US',
@@ -32,9 +32,7 @@ const kayn = Kayn('')({
 
 client.on('ready', () => {
     console.log("Connected as " + client.user.tag);
-    kayn.CurrentGame.by.summonerID("YSnn-tb2quBJkrzvs4z72iu_YZ7g9XarIJbwHRDIbrBWg9A").callback(function(err,match){
-       // console.log(match.gameMode)
-    })
+
 })
 
 client.on('message', (receivedMessage) => {
@@ -92,12 +90,27 @@ if(support == "details" || support == "Details" ) {
             receivedMessage.channel.send("Summoner name: " + summoner.name + "     Level: " + summoner.summonerLevel)
         });
     }
-
+     //Only works on one word names no spaces
     else{
-        receivedMessage.channel.send("Im Sorry summoner but i dont know who that is")
+        kayn.Summoner.by.name(tempSummoner).callback(function (err, summoner) {
+            receivedMessage.channel.send("Summoner name: " + summoner.name + "     Level: " + summoner.summonerLevel)
+        });
     }
 }
+    if(support =="gamedetails" || support == "game"){
+        let tempSummoner = theSummoner
+       let kayn.Summoner.by.name(tempSummoner).callback(function (err, summoner) {
+
+        });
+
+        kayn.CurrentGame.by.summonerID(tempId).callback(function (err, match) {
+            recievedMessage.channel.send(CurrentGame.participants )
+
+        })
+
+    }
 });
+
 
 
 // Get your bot's secret token from:
