@@ -1,2 +1,1 @@
-"# Soraka" 
-"# Soraka" 
+"Soraka is a bot meant to interact with riot games api and post news for league of legends. in order to se this bt the user wold have to make a tokens.json file with tokens for both the discord and riot games api
