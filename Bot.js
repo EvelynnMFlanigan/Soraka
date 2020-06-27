@@ -59,7 +59,15 @@ client.on('ready', () => {
                 if(lastNews.length > 5){
                     lastNews.shift()
                 }
-                client.channels.cache.get('722539874825142422').send('https://na.leagueoflegends.com' + preUrl)
+                try {
+                    if (preUrl.includes('youtube') == false) {
+                        client.channels.cache.get('722539874825142422').send('https://na.leagueoflegends.com' + preUrl)
+                    } else {
+                        client.channels.cache.get('722539874825142422').send(preUrl)
+                    }
+                } catch(error){
+                    client.channels.cache.get('722539874825142422').send(error)
+                }
             }
         })
     })
@@ -88,6 +96,9 @@ client.on('message', (receivedMessage) => {
         });
     }
 });
+client.on('guildMemberRemove', (member) =>{
 
+client.channels.cache.get('476166418182832140').send(member.displayName + ' Has left the server')
+});
 
 client.login(tokens.discordToken)
